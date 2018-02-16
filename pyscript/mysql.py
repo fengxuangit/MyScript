@@ -8,11 +8,11 @@ import sys
 
 class MySQLHander(object):
     def __init__(self):
-        host     = '127.0.0.1'
-        username = 'root'
-        password = '123480'
+        host     = '45.76.190.236'
+        username = 'mysql'
+        password = 'mysql123480'
         port     = '3306'
-        database = 'shadow'
+        database = 'video'
         charset  = 'utf-8'
         try:
             self._conn = MySQLdb.connect(host=host,
@@ -54,8 +54,9 @@ class MySQLHander(object):
         try:
             self._cur.execute("SET NAMES utf8")
             self._cur.execute(sql)
+            insertid = self._conn.insert_id()
             self._conn.commit()
-            return self._conn.insert_id()
+            return insertid
         except MySQLdb.Error, e:
             self.error_code = e.args[0]
             print "DATABASE ERROR: ",e.args[0],e.args[1]
